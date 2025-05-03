@@ -3,84 +3,81 @@ import java.util.Set;
 import java.util.Arrays;
 
 public class project_sc_4037 {
-
+    
 	public static boolean isLetter(char ch) {
-		
+        
+        int ascii = (int) ch;
+
+        if (ascii >= 65 && ascii <= 90 || ascii >= 97 && ascii <= 122) {
+            return true;
+        }
+        return false;
+
+    }
         
     public static boolean isSameLetterIgnoreCase(char ch1, char ch2) {
-        
+
+        int fst = (int) ch1;
+        int sec = (int) ch2;
+
+        if (fst >= 65 && fst <= 90 ) {
+            fst+=32;
+        }
+
+        if (sec >= 65 && sec <= 90) {
+            sec+=32;
+        }
+
+        if (fst == sec) {
+            return true;
+        }
+        return false;
+
+    }
+    
     public static String longestWord(String s) {
 
+        String str = s.toLowerCase();
+        String[] words = str.split(" ");
+        String max = words[0];
+
+        for (int i = 0; i < words.length;i++) {
+            if (!words[i].matches("\\d+")) {
+            if (words[i].length() > max.length()) {
+                max = words[i];
+            }
+        }
+            
+        }
+        return max; 
     }
 
     public static int countDifferentLetters(String s) {
+        String str = s.toLowerCase();
+        String[] letters = str.split("");
+        String cur = " ";
 
-        
-    }
-
-    public static char mostCommonLetter(String s) {
-        
-        s = s.toLowerCase();
-        char[] letters = new char[s.length()];
-        
-        for (int i = 0; i < s.length(); i++) {
-            letters[i] = s.charAt(i);
-        }
-
-        int count = 0;
-        int cur = 0;
-        char letter = ' ';
+        int countDiff = 0;
 
         for (int i = 0; i < letters.length; i++) {
-            if (letters[i] == ' ') continue;  // Skip spaces
-            
-            count = 0;  // Reset count for each letter
-    
-            // Count occurrences of the current letter
-            for (int j = 0; j < letters.length; j++) {
-                if (letters[i] == letters[j]) {
-                    count++;
+            int fstCount = 0;
+            cur = letters[i];
+            for (int j = 1; j < letters.length; j++) {
+                if (cur != letters[j]) {
+                    fstCount++;
                 }
+                if (fstCount == (letters.length - j)) {
+                    countDiff++;
+                    }
             }
+           
+            }
+            return countDiff;
+        }
     
-            // If the current count is higher than the previous maximum count, update it
-            if (count > cur) {
-                cur = count;
-                letter = letters[i];
-            }
-        }
-        
-        return letter;  // Return the most common letter
-    }
+    
 
-    public static int countUniqueWords(String s) {
-
-        s = s.toLowerCase();
-        String[] words = s.split(" ");
-        
-        Arrays.sort(words);
-
-        boolean isUnique = true;
-        String word = " ";
-        int singleCount = 0;
-        int count = 0;
-
-        for (int i = 0; i < words.length; i++) {
-            word = words[i];
-            for(int j = 0; j < words.length; j++) {
-                if (word != words[j]) {
-                    break;
-                } else 
-                singleCount++;
-            }
-            if (singleCount != 1) {
-                count++;
-            }
-        }
-
-        return count;
-    }
-
+  
 
 
 	public static void main(String[] args) {
@@ -88,13 +85,13 @@ public class project_sc_4037 {
 		System.out.println("\n" + isLetter('A')); // true
 		System.out.println(isLetter('1')); // false
 
-        System.out.println(isSameLetterIgnoreCase('A', 'a')); // true
+        System.out.println(isSameLetterIgnoreCase('Z', 'z')); // true
 		System.out.println(isSameLetterIgnoreCase('1', 'A')); // false
 
-        System.out.println(longestWord(" 1 8"));
-        System.out.println(countDifferentLetters("Hello there"));
+        System.out.println(longestWord("hello there my number is 123456789 and my name is Allister")); // Allister
+        System.out.println(countDifferentLetters("bingo")); // 6
 
-        System.out.println(mostCommonLetter("Hello there"));
-        System.out.println(countUniqueWords("A B A C A D"));
+
+
     }
 }
