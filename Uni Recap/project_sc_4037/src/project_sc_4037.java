@@ -1,6 +1,6 @@
 import java.util.HashSet;
 import java.util.Set;
-import java.util.Arrays;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,7 +68,6 @@ public class project_sc_4037 {
     
     public static char mostCommonLetter (String s) {
         String str = s.toLowerCase().replace(" ", "");
-        String[] letters = str.split("");
         
         // First time using map
         Map<Character, Integer> counter = new HashMap<>();
