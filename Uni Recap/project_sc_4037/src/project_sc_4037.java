@@ -53,27 +53,18 @@ public class project_sc_4037 {
     }
 
     public static int countDifferentLetters(String s) {
-        String str = s.toLowerCase();
+        String str = s.toLowerCase().replace(" ", "");
         String[] letters = str.split("");
-        String cur = " ";
-
-        int countDiff = 0;
+        
+        Set <String> unique = new HashSet<>();
 
         for (int i = 0; i < letters.length; i++) {
-            int fstCount = 0;
-            cur = letters[i];
-            for (int j = 1; j < letters.length; j++) {
-                if (cur != letters[j]) {
-                    fstCount++;
-                }
-                if (fstCount == (letters.length - j)) {
-                    countDiff++;
-                    }
+            if (letters[i] != ("//d+")) {
+                unique.add(letters[i]);
             }
-           
-            }
-            return countDiff;
         }
+        return unique.size();
+    }
     
     
 
@@ -89,7 +80,7 @@ public class project_sc_4037 {
 		System.out.println(isSameLetterIgnoreCase('1', 'A')); // false
 
         System.out.println(longestWord("hello there my number is 123456789 and my name is Allister")); // Allister
-        System.out.println(countDifferentLetters("bingo")); // 6
+        System.out.println(countDifferentLetters("hello there")); // 6
 
 
 
